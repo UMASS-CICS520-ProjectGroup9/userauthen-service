@@ -22,12 +22,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-36&uwcgm*2+ak#c0sb%zsc@3&*h&n^hsc@g28pp72%7)wtt61l'
+SECRET_KEY = 'Umass-CSCI520-FinalProject-Group9'
+
+SIMPLE_JWT = {
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+AUTH_USER_MODEL = "users.CustomUser"
 
 
 # Application definition
@@ -41,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'userauthen',
+    'users'
 ]
 
 REST_FRAMEWORK = {
@@ -54,6 +63,12 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+AUTHENTICATION_BACKENDS = [
+    "userauthen.backends.EmailAuthBackend",
+    "django.contrib.auth.backends.ModelBackend"
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,3 +152,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

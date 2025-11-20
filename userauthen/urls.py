@@ -19,14 +19,18 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from .views import RegisterView, ProfileView
-from .views import AdminLoginView
+from .views import RegisterView, ProfileView, changePassword
+from .views import AdminLoginView, LoginView, MyTokenObtainPairView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("admin-login/", AdminLoginView.as_view(), name="admin_login"),
+    path("api/admin-login/", AdminLoginView.as_view(), name="admin_login"),
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/profile/', ProfileView.as_view(), name='profile'),
+    path("api/token/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/changepwd/", changePassword, name="changePassword"),
 ]
