@@ -16,11 +16,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'role', 'password']
 
     def create(self, validated_data):
+        # Default to the model's base role when none is provided to avoid integrity errors.
+        role = validated_data.get('role', getattr(User, "base_role", None))
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data.get('email'),
             password=validated_data['password'],
-            role = validated_data.get('role')
+            role=role
         )
         return user
     
