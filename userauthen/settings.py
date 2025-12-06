@@ -100,6 +100,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'userauthen.wsgi.application'
 
+ALLOWED_HOSTS = ['ping4learn0.pythonanywhere.com']
+
+STATIC_ROOT = '/home/ping4learn0/userauthen-service/static/'
+
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
